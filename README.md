@@ -25,7 +25,7 @@ You'll find everything from module explanations to a full step-by-step guide on 
 
 ## 🚀 Join the Community
 
-Have questions, feedback, or support? Hop into my Discord!
+Have questions, feedback, or support? Hop into my Discord! [Voidline Interactive](https://discord.gg/u3wBrNFaV4)
 
 ---
 
