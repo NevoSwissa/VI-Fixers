@@ -1,0 +1,556 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap');
+
+:root {
+    --vicall-primary: #FF2D55;
+    --vicall-accent: #FFE135;
+    --vicall-bg: rgba(8, 8, 12, 0.95);
+    --vicall-text: #FFFFFF;
+    --vicall-text-dim: rgba(255, 255, 255, 0.7);
+    --vicall-border: #FF2D55;
+    --vicall-glow: rgba(255, 45, 85, 0.4);
+    --vicall-success: #00FF88;
+    --vicall-surface: rgba(20, 20, 30, 0.8);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#vicall-container {
+    position: fixed;
+    top: 15vh;
+    left: 2vw;
+    width: 22em;
+    z-index: 1000;
+    font-family: 'Rajdhani', sans-serif;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateX(0);
+    opacity: 0;
+}
+
+#vicall-container.active {
+    opacity: 1;
+}
+
+.vicall-notification {
+    background: var(--vicall-bg);
+    border: 0.15em solid var(--vicall-border);
+    border-radius: 0.4em;
+    box-shadow: 0 0 2em var(--vicall-glow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.vicall-notification::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.3em;
+    height: 100%;
+    background: var(--vicall-primary);
+    box-shadow: 0 0 1em var(--vicall-glow);
+}
+
+.vicall-header {
+    display: flex;
+    align-items: center;
+    padding: 1em 1.2em;
+    background: rgba(255, 45, 85, 0.12);
+    border-bottom: 0.1em solid rgba(255, 45, 85, 0.25);
+    position: relative;
+}
+
+.vicall-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--vicall-primary) 50%, transparent 100%);
+    opacity: 0.6;
+}
+
+.vicall-icon {
+    width: 1.4em;
+    height: 1.4em;
+    background: var(--vicall-primary);
+    border-radius: 50%;
+    margin-right: 0.8em;
+    position: relative;
+    animation: vicall-pulse 2s ease-in-out infinite;
+}
+
+.vicall-icon::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.6em;
+    height: 0.6em;
+    background: white;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.vicall-title {
+    flex-grow: 1;
+    color: var(--vicall-primary);
+    font-size: 1.3em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 0.5em var(--vicall-glow);
+    text-transform: uppercase;
+}
+
+.vicall-status {
+    color: var(--vicall-success);
+    font-size: 0.8em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.vicall-content {
+    padding: 1.2em;
+    position: relative;
+}
+
+.vicall-caller {
+    color: var(--vicall-text);
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.vicall-duration {
+    color: var(--vicall-text-dim);
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-bottom: 1em;
+    font-family: 'Courier New', monospace;
+}
+
+.vicall-waveform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4em;
+    margin: 1em 0;
+    background: var(--vicall-surface);
+    border-radius: 0.4em;
+    border: 1px solid rgba(255, 45, 85, 0.2);
+    position: relative;
+    overflow: hidden;
+    padding: 0.5em;
+}
+
+.vicall-waveform::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 45, 85, 0.1) 50%, transparent 100%);
+    animation: vicall-scan 4s ease-in-out infinite;
+}
+
+.wave-bar {
+    width: 0.25em;
+    background: var(--vicall-primary);
+    margin: 0 0.12em;
+    border-radius: 0.15em;
+    box-shadow: 0 0 0.5em rgba(255, 45, 85, 0.3);
+    transition: all 0.3s ease;
+}
+
+.wave-bar:nth-child(1) {
+    height: 1.2em;
+    animation: vicall-wave-complex 2.1s ease-in-out infinite;
+    animation-delay: 0s;
+}
+
+.wave-bar:nth-child(2) {
+    height: 1.8em;
+    animation: vicall-wave-complex 1.8s ease-in-out infinite;
+    animation-delay: 0.15s;
+}
+
+.wave-bar:nth-child(3) {
+    height: 2.8em;
+    animation: vicall-wave-complex 2.3s ease-in-out infinite;
+    animation-delay: 0.3s;
+}
+
+.wave-bar:nth-child(4) {
+    height: 2.2em;
+    animation: vicall-wave-complex 1.9s ease-in-out infinite;
+    animation-delay: 0.45s;
+}
+
+.wave-bar:nth-child(5) {
+    height: 3.2em;
+    animation: vicall-wave-complex 2.5s ease-in-out infinite;
+    animation-delay: 0.6s;
+}
+
+.wave-bar:nth-child(6) {
+    height: 1.9em;
+    animation: vicall-wave-complex 2.0s ease-in-out infinite;
+    animation-delay: 0.75s;
+}
+
+.wave-bar:nth-child(7) {
+    height: 2.6em;
+    animation: vicall-wave-complex 2.2s ease-in-out infinite;
+    animation-delay: 0.9s;
+}
+
+.wave-bar:nth-child(8) {
+    height: 1.4em;
+    animation: vicall-wave-complex 1.7s ease-in-out infinite;
+    animation-delay: 1.05s;
+}
+
+.wave-bar:nth-child(9) {
+    height: 2.4em;
+    animation: vicall-wave-complex 2.4s ease-in-out infinite;
+    animation-delay: 1.2s;
+}
+
+.wave-bar:nth-child(10) {
+    height: 3.0em;
+    animation: vicall-wave-complex 2.1s ease-in-out infinite;
+    animation-delay: 1.35s;
+}
+
+.wave-bar:nth-child(11) {
+    height: 1.6em;
+    animation: vicall-wave-complex 1.9s ease-in-out infinite;
+    animation-delay: 1.5s;
+}
+
+.wave-bar:nth-child(12) {
+    height: 2.3em;
+    animation: vicall-wave-complex 2.3s ease-in-out infinite;
+    animation-delay: 1.65s;
+}
+
+.vicall-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8em 1.2em;
+    border-top: 0.1em solid rgba(255, 45, 85, 0.25);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.vicall-signal {
+    display: flex;
+    align-items: flex-end;
+    height: 1em;
+}
+
+.signal-bar {
+    width: 0.25em;
+    background: var(--vicall-primary);
+    margin-right: 0.15em;
+    border-radius: 0.1em;
+    animation: vicall-signal 2.5s infinite ease-in-out;
+}
+
+.signal-bar:nth-child(1) {
+    height: 0.4em;
+    animation-delay: 0s;
+}
+
+.signal-bar:nth-child(2) {
+    height: 0.7em;
+    animation-delay: 0.3s;
+}
+
+.signal-bar:nth-child(3) {
+    height: 1em;
+    animation-delay: 0.6s;
+    margin-right: 0;
+}
+
+.vicall-quality {
+    color: var(--vicall-text-dim);
+    font-size: 0.9em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+#vicall-incoming {
+    display: none;
+}
+
+#vicall-container.incoming-mode .vicall-notification {
+    display: none;
+}
+
+#vicall-container.incoming-mode #vicall-incoming {
+    display: block;
+}
+
+.vicall-incoming-notification {
+    background: var(--vicall-bg);
+    border: 0.15em solid var(--vicall-border);
+    border-radius: 0.4em;
+    box-shadow: 0 0 2em var(--vicall-glow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    position: relative;
+    animation: incoming-pulse 1.5s ease-in-out infinite;
+}
+
+.vicall-incoming-notification::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.3em;
+    height: 100%;
+    background: var(--vicall-primary);
+    box-shadow: 0 0 1em var(--vicall-glow);
+    animation: incoming-glow 1.5s ease-in-out infinite;
+}
+
+.incoming-pulse {
+    animation: incoming-icon-pulse 1.5s ease-in-out infinite;
+}
+
+.vicall-timeout {
+    color: var(--vicall-accent);
+    font-size: 1.1em;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: rgba(255, 225, 53, 0.15);
+    padding: 0.3em 0.6em;
+    border-radius: 0.2em;
+    border: 1px solid var(--vicall-accent);
+    animation: timeout-blink 1s ease-in-out infinite;
+}
+
+.vicall-incoming-subtitle {
+    color: var(--vicall-text-dim);
+    font-size: 0.9em;
+    font-weight: 500;
+    margin-top: 0.3em;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.incoming-caller {
+    font-size: 1.4em;
+    color: var(--vicall-text);
+    text-shadow: 0 0 0.8em var(--vicall-glow);
+    animation: caller-glow 2s ease-in-out infinite;
+}
+
+.vicall-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.2em;
+    gap: 1em;
+    border-top: 0.1em solid rgba(255, 45, 85, 0.25);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.vicall-button-prompt {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+.vicall-button-prompt:hover {
+    transform: translateY(-2px);
+}
+
+.vicall-button-prompt .key-container {
+    margin-right: 0.8em;
+}
+
+.vicall-button-prompt .key-outline {
+    width: 2.2em;
+    height: 2.2em;
+    transition: all 0.3s ease;
+}
+
+.accept-key {
+    border-color: var(--vicall-success);
+    background-color: rgba(0, 255, 136, 0.1);
+    box-shadow: 0 0 0.8em rgba(0, 255, 136, 0.4);
+}
+
+.accept-key::after {
+    background: radial-gradient(circle, rgba(0, 255, 136, 0.2) 0%, rgba(0, 255, 136, 0) 70%);
+}
+
+.decline-key {
+    border-color: var(--vicall-primary);
+    background-color: rgba(255, 45, 85, 0.1);
+    box-shadow: 0 0 0.8em var(--vicall-glow);
+}
+
+.decline-key::after {
+    background: radial-gradient(circle, rgba(255, 45, 85, 0.2) 0%, rgba(255, 45, 85, 0) 70%);
+}
+
+.accept-text {
+    color: var(--vicall-success);
+    text-shadow: 0 0 0.5em rgba(0, 255, 136, 0.4);
+}
+
+.decline-text {
+    color: var(--vicall-primary);
+    text-shadow: 0 0 0.5em var(--vicall-glow);
+}
+
+.vicall-button-prompt .action-text {
+    font-size: 1.1em;
+    margin-bottom: 0.2em;
+}
+
+.vicall-button-prompt .action-description {
+    font-size: 0.85em;
+    opacity: 0.7;
+}
+
+@keyframes incoming-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 2em var(--vicall-glow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    50% {
+        box-shadow: 0 0 3em var(--vicall-glow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+}
+
+@keyframes incoming-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 1em var(--vicall-glow);
+    }
+
+    50% {
+        box-shadow: 0 0 1.5em var(--vicall-glow);
+    }
+}
+
+@keyframes incoming-icon-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0.5em var(--vicall-glow);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 1em var(--vicall-glow);
+    }
+}
+
+@keyframes timeout-blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes caller-glow {
+
+    0%,
+    100% {
+        text-shadow: 0 0 0.8em var(--vicall-glow);
+    }
+
+    50% {
+        text-shadow: 0 0 1.2em var(--vicall-glow);
+    }
+}
+
+@keyframes vicall-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 45, 85, 0.7);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 0 0.5em rgba(255, 45, 85, 0);
+        transform: scale(1.05);
+    }
+}
+
+@keyframes vicall-wave-complex {
+
+    0%,
+    100% {
+        transform: scaleY(0.3);
+        opacity: 0.6;
+    }
+
+    25% {
+        transform: scaleY(0.8);
+        opacity: 0.9;
+    }
+
+    50% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+
+    75% {
+        transform: scaleY(0.6);
+        opacity: 0.8;
+    }
+}
+
+@keyframes vicall-signal {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: scaleY(0.7);
+    }
+}
+
+@keyframes vicall-scan {
+    0% {
+        left: -100%;
+    }
+
+    50% {
+        left: 100%;
+    }
+
+    100% {
+        left: -100%;
+    }
+}

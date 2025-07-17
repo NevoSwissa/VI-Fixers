@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap');
+
+:root {
+    --objective-primary: #FF2D55;
+    --objective-secondary: #00F0FF;
+    --objective-bg: rgba(10, 10, 15, 0.75);
+    --objective-text: #FFFFFF;
+    --objective-border: #FF2D55;
+    --objective-glow: rgba(255, 45, 85, 0.6);
+    --objective-highlight: rgba(255, 45, 85, 0.15);
+}
+
+#viobjective-container {
+    position: absolute;
+    top: 45%;
+    right: 2%;
+    width: 25%;
+    max-width: 400px;
+    background-color: var(--objective-bg);
+    border-radius: 0.3em;
+    border-left: 0.15em solid var(--objective-border);
+    box-shadow: 0 0 1em var(--objective-glow);
+    padding: 1em;
+    color: var(--objective-text);
+    font-family: 'Rajdhani', sans-serif;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: none;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+#viobjective-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.3em;
+    height: 100%;
+    background-color: var(--objective-primary);
+    box-shadow: 0 0 1em var(--objective-glow);
+}
+
+#viobjective-container.visible {
+    opacity: 1;
+    display: block;
+    animation: objective-fade-in 0.5s forwards;
+}
+
+.objective-mission {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+
+.objective-icon {
+    margin-right: 0.6em;
+    color: var(--objective-primary);
+    font-size: 1.2em;
+}
+
+.objective-title {
+    color: var(--objective-primary);
+    font-size: 1.2em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 0.5em var(--objective-glow);
+    text-transform: uppercase;
+}
+
+.objective-divider {
+    height: 0.15em;
+    background-color: var(--objective-primary);
+    opacity: 0.5;
+    margin: 0.5em 0;
+    width: 100%;
+    box-shadow: 0 0 0.8em var(--objective-glow);
+}
+
+.objective-text {
+    color: var(--objective-text);
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+    margin-top: 0.5em;
+    padding-left: 0.5em;
+    border-left: 0.2em solid var(--objective-secondary);
+}
+
+.objective-progress {
+    height: 0.15em;
+    background-color: rgba(0, 240, 255, 0.3);
+    width: 100%;
+    margin-top: 0.8em;
+    position: relative;
+    border-radius: 0.1em;
+}
+
+.objective-progress-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: var(--objective-secondary);
+    box-shadow: 0 0 0.5em var(--objective-secondary);
+    border-radius: 0.1em;
+    transition: width 0.8s ease;
+}
+
+@keyframes objective-fade-in {
+    0% {
+        transform: translateX(1em);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes objective-fade-out {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(1em);
+        opacity: 0;
+    }
+}
+
+.objective-flash {
+    animation: objective-flash 1s;
+}
+
+@keyframes objective-flash {
+    0%, 100% {
+        box-shadow: 0 0 1em var(--objective-glow);
+    }
+    50% {
+        box-shadow: 0 0 2em var(--objective-glow);
+    }
+}
+
+#viobjective-container.updating .objective-text {
+    animation: text-update 0.5s;
+}
+
+@keyframes text-update {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#viobjective-container.fade-out {
+    animation: objective-fade-out 0.5s forwards;
+}
+
+.objective-optional {
+    margin-top: 0.8em;
+    color: #FFD700;
+    font-size: 0.9em;
+    font-style: italic;
+}

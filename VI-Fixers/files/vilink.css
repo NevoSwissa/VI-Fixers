@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap');
+
+:root {
+    --vilink-primary: #FF2D55;
+    --vilink-secondary: #00F0FF;
+    --vilink-bg: rgba(10, 10, 15, 0.9);
+    --vilink-text: #FFFFFF;
+    --vilink-glow: rgba(255, 45, 85, 0.6);
+}
+
+#vilink-container {
+    position: fixed;
+    top: 10vh;
+    right: 2vw;
+    width: 25em;
+    z-index: 1000;
+    font-family: 'Rajdhani', sans-serif;
+    transition: all 0.3s ease-out;
+    transform: translateX(30em);
+}
+
+#vilink-container.active {
+    transform: translateX(0);
+}
+
+.vilink-notification {
+    background-color: var(--vilink-bg);
+    border: 0.15em solid var(--vilink-primary);
+    border-radius: 0.3em;
+    box-shadow: 0 0 1.5em var(--vilink-glow);
+    overflow: hidden;
+    position: relative;
+}
+
+.vilink-notification::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.3em;
+    height: 100%;
+    background-color: var(--vilink-primary);
+    box-shadow: 0 0 1em var(--vilink-glow);
+}
+
+.vilink-header {
+    display: flex;
+    align-items: center;
+    padding: 0.8em 1em;
+    background-color: rgba(255, 45, 85, 0.15);
+    border-bottom: 0.1em solid var(--vilink-primary);
+}
+
+.vilink-icon {
+    width: 1.2em;
+    height: 1.2em;
+    background-color: var(--vilink-primary);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    margin-right: 0.8em;
+    animation: speaker-glowing 0.8s ease-in-out infinite alternate;
+}
+
+.vilink-title {
+    flex-grow: 1;
+    color: var(--vilink-primary);
+    font-size: 1.2em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 0.5em var(--vilink-glow);
+}
+
+.vilink-content {
+    padding: 1em;
+}
+
+.vilink-sender {
+    color: var(--vilink-secondary);
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 0.4em;
+    letter-spacing: 0.05em;
+}
+
+.vilink-subject {
+    color: var(--vilink-text);
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-bottom: 0.8em;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 0.15em rgba(255, 255, 255, 0.5);
+}
+
+.vilink-message {
+    color: var(--vilink-text);
+    font-size: 1em;
+    line-height: 1.4;
+    opacity: 0.9;
+    max-height: 15em;
+    overflow-y: auto;
+}
+
+.vilink-message::-webkit-scrollbar {
+    display: none;
+}
+
+.vilink-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8em 1em;
+    border-top: 0.1em solid rgba(255, 45, 85, 0.3);
+}
+
+.vilink-timestamp {
+    color: var(--vilink-text);
+    font-size: 0.9em;
+    opacity: 0.7;
+}
+
+.vilink-signal {
+    display: flex;
+    align-items: flex-end;
+    height: 1em;
+}
+
+.signal-bar {
+    width: 0.3em;
+    background-color: var(--vilink-primary);
+    margin-right: 0.2em;
+    animation: signal-wave 2s infinite;
+}
+
+.signal-bar:nth-child(1) {
+    height: 0.4em;
+    animation-delay: 0s;
+}
+
+.signal-bar:nth-child(2) {
+    height: 0.7em;
+    animation-delay: 0.2s;
+}
+
+.signal-bar:nth-child(3) {
+    height: 1em;
+    animation-delay: 0.4s;
+    margin-right: 0;
+}
+
+@keyframes speaker-glowing {
+    0% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes signal-wave {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes slide-in-right {
+    0% {
+        transform: translateX(30em);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out-right {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(30em);
+        opacity: 0;
+    }
+}
+
+#vilink-container.slide-in {
+    animation: slide-in-right 0.5s forwards;
+}
+
+#vilink-container.slide-out {
+    animation: slide-out-right 0.5s forwards;
+}

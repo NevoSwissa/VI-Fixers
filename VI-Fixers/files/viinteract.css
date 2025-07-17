@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap');
+
+:root {
+    --interact-primary: #FF2D55;
+    --interact-secondary: #00F0FF;
+    --interact-bg: rgba(10, 10, 15, 0.75);
+    --interact-text: #FFFFFF;
+    --interact-border: #FF2D55;
+    --interact-glow: rgba(255, 45, 85, 0.6);
+    --interact-highlight: rgba(255, 45, 85, 0.15);
+}
+
+#viinteract-container {
+    position: absolute;
+    bottom: 15%;
+    right: 2%;
+    transform: translateY(100%);
+    opacity: 0;
+    font-family: 'Rajdhani', sans-serif;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1000;
+}
+
+#viinteract-container.visible {
+    transform: translateY(0);
+    opacity: 1;
+    animation: interact-pulse 2s infinite;
+}
+
+#viinteract-container.sliding-out {
+    transform: translateY(10px) translateX(20px);
+    opacity: 0;
+    animation: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.interact-prompt {
+    display: flex;
+    align-items: center;
+    background-color: var(--interact-bg);
+    border: 0.15em solid var(--interact-border);
+    border-radius: 0.3em;
+    box-shadow: 0 0 1.5em var(--interact-glow);
+    padding: 0.8em 1.2em;
+    margin-bottom: 0.8em;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+.interact-prompt::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.3em;
+    height: 100%;
+    background-color: var(--interact-primary);
+    box-shadow: 0 0 1em var(--interact-glow);
+}
+
+.sliding-out .interact-prompt {
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+.sliding-out .interact-prompt:nth-child(1) {
+    transition-delay: 0s;
+}
+
+.sliding-out .interact-prompt:nth-child(2) {
+    transition-delay: 0.05s;
+}
+
+.sliding-out .interact-prompt:nth-child(3) {
+    transition-delay: 0.1s;
+}
+
+.key-container {
+    margin-right: 1em;
+    position: relative;
+}
+
+.key-outline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5em;
+    height: 2.5em;
+    border: 0.15em solid var(--interact-primary);
+    border-radius: 0.3em;
+    box-shadow: 0 0 0.8em var(--interact-glow);
+    background-color: rgba(255, 45, 85, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.key-outline::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 45, 85, 0.2) 0%, rgba(255, 45, 85, 0) 70%);
+    animation: rotate-glow 8s linear infinite;
+}
+
+.key-text {
+    color: var(--interact-text);
+    font-size: 1.2em;
+    font-weight: 700;
+    text-shadow: 0 0 0.5em var(--interact-glow);
+    z-index: 1;
+}
+
+.action-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.action-text {
+    color: var(--interact-primary);
+    font-size: 1.2em;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-shadow: 0 0 0.5em var(--interact-glow);
+    margin-bottom: 0.2em;
+}
+
+.action-description {
+    color: var(--interact-text);
+    font-size: 0.9em;
+    opacity: 0.8;
+    letter-spacing: 0.03em;
+}
+
+@keyframes interact-pulse {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes rotate-glow {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes key-press {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.key-press-animation {
+    animation: key-press 0.3s ease-in-out;
+}
+
+.interact-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.interact-option {
+    margin-bottom: 0.4em;
+    opacity: 1;
+}

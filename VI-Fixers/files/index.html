@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="visubtitles.css">
+        <link rel="stylesheet" href="vilink.css">
+        <link rel="stylesheet" href="vinotification.css">
+        <link rel="stylesheet" href="vidialogue.css">
+        <link rel="stylesheet" href="viinteract.css">
+        <link rel="stylesheet" href="viobjective.css">
+        <link rel="stylesheet" href="vicall.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+    <body>
+        <div id="subtitle-container" class="hidden">
+            <div class="subtitle-wrapper">
+                <div class="subtitle-speaker-container">
+                    <div class="speaker-icon"></div>
+                    <div id="subtitle-speaker" class="subtitle-speaker"></div>
+                </div>
+                <div id="subtitle-text" class="subtitle-text"></div>
+                <div class="subtitle-progress-container">
+                    <div id="subtitle-progress" class="subtitle-progress"></div>
+                </div>
+            </div>
+        </div>
+        <div id="vilink-container" class="hidden">
+            <div class="vilink-notification">
+                <div class="vilink-header">
+                    <div class="vilink-icon"></div>
+                    <div class="vilink-title">VI-LINK</div>
+                </div>
+                <div class="vilink-content">
+                    <div class="vilink-sender" id="vilink-sender">SENDER</div>
+                    <div class="vilink-subject" id="vilink-subject">SUBJECT</div>
+                    <div class="vilink-message" id="vilink-message">Message content goes here...</div>
+                </div>
+                <div class="vilink-footer">
+                    <div class="vilink-timestamp" id="vilink-timestamp">00:00</div>
+                    <div class="vilink-signal">
+                        <div class="signal-bar"></div>
+                        <div class="signal-bar"></div>
+                        <div class="signal-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="vidialogue-container" class="vidialogue-container">
+            <div class="dialogue-wrapper">
+                <div id="prompt-text" class="prompt-text"></div>
+                <ul id="choice-list" class="choice-list"></ul>
+                <div id="choice-timer" class="choice-timer"></div>
+            </div>
+        </div>
+        <div id="vinotification-container" class="vinotification-container"></div>
+        <div id="viinteract-container" class="viinteract-container"></div>
+        <div id="vicall-container">
+            <div class="vicall-notification">
+                <div class="vicall-header">
+                    <div class="vicall-icon"></div>
+                    <div class="vicall-title">INCOMING CALL</div>
+                    <div class="vicall-status">ACTIVE</div>
+                </div>
+
+                <div class="vicall-content">
+                    <div id="vicall-caller-name" class="vicall-caller">JACKIE WELLES</div>
+                    <div id="vicall-duration" class="vicall-duration">00:00</div>
+
+                    <div class="vicall-waveform">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                </div>
+
+                <div class="vicall-footer">
+                    <div class="vicall-signal">
+                        <div class="signal-bar"></div>
+                        <div class="signal-bar"></div>
+                        <div class="signal-bar"></div>
+                    </div>
+                    <div class="vicall-quality">HD QUALITY</div>
+                </div>
+            </div>
+
+            <div id="vicall-incoming" class="vicall-incoming-notification">
+                <div class="vicall-header">
+                    <div class="vicall-icon incoming-pulse"></div>
+                    <div class="vicall-title">INCOMING CALL</div>
+                    <div id="vicall-timeout" class="vicall-timeout">5s</div>
+                </div>
+
+                <div class="vicall-content">
+                    <div id="vicall-incoming-caller" class="vicall-caller incoming-caller">JACKIE WELLES</div>
+                    <div class="vicall-incoming-subtitle">Choose your response</div>
+                </div>
+
+                <div class="vicall-buttons">
+                    <div class="vicall-button-prompt">
+                        <div class="key-container">
+                            <div class="key-outline decline-key">
+                                <div class="key-text">X</div>
+                            </div>
+                        </div>
+                        <div class="action-container">
+                            <div class="action-text decline-text">DECLINE</div>
+                            <div class="action-description">Reject call</div>
+                        </div>
+                    </div>
+
+                    <div class="vicall-button-prompt">
+                        <div class="key-container">
+                            <div class="key-outline accept-key">
+                                <div class="key-text">E</div>
+                            </div>
+                        </div>
+                        <div class="action-container">
+                            <div class="action-text accept-text">ACCEPT</div>
+                            <div class="action-description">Answer call</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="audio-subtitles.js"></script>
+        <script src="vilink.js"></script>
+        <script src="vinotification.js"></script>
+        <script src="vidialogue.js"></script>
+        <script src="viinteract.js"></script>
+        <script src="viobjective.js"></script>
+        <script src="vicall.js"></script>
+    </body>
+</html>
