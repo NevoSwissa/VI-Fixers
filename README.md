@@ -1,6 +1,6 @@
 # VI-Fixers - RPG Mission Framework for FiveM
 
-Welcome to VI-Fixers, a modular, story-driven mission framework for FiveM, inspired by games like Cyberpunk 2077. It was built as a sandbox for learning, experimenting, and designing RPG quests. I never finished it as a complete product but it grew into something I’m proud of.
+Welcome to VI-Fixers, a modular, story-driven mission framework for FiveM, inspired by games like *Cyberpunk 2077* and *The Witcher 3*. It was built as a sandbox for learning, experimenting, and designing RPG quests. I never finished it as a complete product but it grew into something I’m proud of.
 So I’m sharing it in full. Free to use & Fully documented.
 Feel free to learn from it, use parts of it, or even expand it into something bigger.
 
